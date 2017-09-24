@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+    <p><%= notice %><%= alert %></p>
+    <h1>課題状況一覧</h1>
+      <%= link_to "課題を提出する", new_studysheet_path, class: 'btn btn-default'  %>
+
+      <% @studysheets.each do |studysheet| %>
+        <h4><strong><%= studysheet.title %></strong></h4>
+        <p>内容:<%= studysheet.content %></p>
+          <%= link_to "編集", edit_studysheet_path(studysheet.id), class: 'btn btn-sm btn-success'  %>
+          <%= link_to '削除', studysheet_path(studysheet.id), method: :delete, data: { confirm: '本当に編集していいですか？' }, class: 'btn btn-sm btn-danger'%>
+      <% end %>
+      </br>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<%= form_for(@studysheet, url: choose_new_or_edit) do |f| %>
+  <% if @studysheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @studysheet.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+      <% @studysheet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.label :title %>
+<%= f.text_field :title, class: 'form-control' %>
+<br>
+<%= f.label :content %>
+<%= f.text_field :content, class: 'form-control' %>
+<br>
+<%= f.submit'提出', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "課題状況一覧画面にもどる", studysheets_path %>
