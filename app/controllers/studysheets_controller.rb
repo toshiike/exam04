@@ -19,6 +19,7 @@ before_action :set_studysheet, only: [:edit, :update, :destroy]
     @studysheet.user_id = current_user.id
     if @studysheet.save
       redirect_to studysheets_path, notice: "作成しました！"
+      NoticeMailer.sendmail_studysheet(@studysheet).deliver
     else
       render 'new'
     end
