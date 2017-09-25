@@ -5,15 +5,20 @@
     <%= form_for(@studysheet) do |f| %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :content %>
+      <%= f.hidden_field :image %>
+      <%= f.hidden_field :image_cache %>
 
         <p>タイトル:<%= @studysheet.title %></p>
         <p>本文:<%= @studysheet.content %></p>
+        <p>画像:<%= image_tag(@studysheet.image) %></p>
         <%= f.submit "登録",class: 'btn btn-primary btn-block' %>
         <% end %>
 
     <%= form_for(@studysheet, url: new_studysheet_path, method: 'get') do |f| %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :content %>
+      <%= f.hidden_field :image %>
+      <%= f.hidden_field :image_cache %>
       <%= f.submit "もどる", name: 'back', class: 'btn btn-default btn-block'  %>
     <% end %>
   </div>

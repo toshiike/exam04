@@ -17,6 +17,10 @@
 <%= f.label :content %>
 <%= f.text_field :content, class: 'form-control' %>
 <br>
+<%= image_tag(@studysheet.image_url) if image_tag(@studysheet.image_url) %>
+<%= f.file_field :image %>
+<%= f.hidden_field :image_cache %>
+
 <%= f.submit'提出', class: 'btn btn-primary btn-block' %>
 <% end %>
 

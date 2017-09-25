@@ -51,7 +51,7 @@ before_action :set_studysheet, only: [:edit, :update, :destroy]
 
   private
     def studysheets_params
-      params.require(:studysheet).permit(:title, :content)
+      params.require(:studysheet).permit(:title, :content, :image, :image_cache)
     end
 
     def set_studysheet
