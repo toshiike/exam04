@@ -1,9 +1,14 @@
 class StudysheetsController < ApplicationController
 before_action :authenticate_user!
-before_action :set_studysheet, only: [:edit, :update, :destroy]
+before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
 
   def index
     @studysheets = Studysheet.all
+  end
+
+  def show
+    @comment = @studysheet.comments.build
+    @comments = @studysheet.comments
   end
 
   def new
@@ -53,7 +58,8 @@ before_action :set_studysheet, only: [:edit, :update, :destroy]
        @studysheet = Studysheet.find(params[:id])
        filepath = @studysheet.image.current_path
        stat = File::stat(filepath)
-       send_file(filepath, :filename => @studysheet.image.url.gsub(/.*\//,''), :length => stat.size)
+       sheet=@studysheet.image.url.gsub(/.*\//,'')
+       send_file(filepath, :filename => sheet, :length => stat.size)
   end
 
   private
