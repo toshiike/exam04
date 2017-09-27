@@ -10,7 +10,8 @@
         <p>内容:<%= studysheet.content %></p>
         <p>作成者:<%= studysheet.user.name %><img src="<%= studysheet.user.image_url %>"></p>
       </br>
-      <p>画像: <%= image_tag(studysheet.image) %><p>
+        　<%= link_to '添付あり',download_pdf_path(studysheet), :class => 'btn btn-default btn-xs' %>
+      </br>
           <%= link_to "編集", edit_studysheet_path(studysheet.id), class: 'btn btn-sm btn-success'  %>
           <%= link_to '削除', studysheet_path(studysheet.id), method: :delete, data: { confirm: '本当に編集していいですか？' }, class: 'btn btn-sm btn-danger'%>
         </div>

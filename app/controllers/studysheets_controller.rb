@@ -49,6 +49,13 @@ before_action :set_studysheet, only: [:edit, :update, :destroy]
     redirect_to studysheets_path, notice: "削除しました！"
   end
 
+  def download
+       @studysheet = Studysheet.find(params[:id])
+       filepath = @studysheet.image.current_path
+       stat = File::stat(filepath)
+       send_file(filepath, :filename => @studysheet.image.url.gsub(/.*\//,''), :length => stat.size)
+  end
+
   private
     def studysheets_params
       params.require(:studysheet).permit(:title, :content, :image, :image_cache)
