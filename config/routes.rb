@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   get 'studysheets/download/:id'=>'studysheets#download',as: :download_pdf
 
+  resources :users, only: [:index, :show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
