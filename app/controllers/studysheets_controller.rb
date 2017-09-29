@@ -9,6 +9,7 @@ before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
   def show
     @comment = @studysheet.comments.build
     @comments = @studysheet.comments
+    Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
   end
 
   def new

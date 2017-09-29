@@ -1,0 +1,14 @@
+<h2>お知らせ</h2>
+<ul>
+  <% @notifications.each do |notification| %>
+  <hr>
+    <li>
+      <span><%= notification.read %></span>
+      <p>
+        <%= notification.comment.user.try(:name) %>さんが
+        あなたの投稿（<%= link_to "#{notification.comment.studysheet.title}", studysheet_path(notification.comment.studysheet, notification_id: notification.id) %>）にコメントしました。
+      </p>
+      <p><%= posted_time(notification.created_at) %></p>
+    </li>
+  <% end %>
+</ul>

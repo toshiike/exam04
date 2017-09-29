@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'notifications/index'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     registrations: "users/registrations",
@@ -26,6 +28,10 @@ Rails.application.routes.draw do
   get 'studysheets/download/:id'=>'studysheets#download',as: :download_pdf
 
   resources :users, only: [:index, :show]
+
+  resources :conversations do
+  resources :messages
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
