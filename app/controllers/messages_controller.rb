@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
     if @message.save
     redirect_to conversation_messages_path(@conversation)
     else
-    redirect_to conversation_messages_path(@conversation), notice: “入力が空です。”
+    redirect_to conversation_messages_path(@conversation), notice: "入力が空です。"
     end
 
   end
