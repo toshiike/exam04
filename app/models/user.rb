@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
+  has_many :messages, dependent: :destroy
+
   has_many :studysheets, dependent: :destroy
   # CommentモデルのAssociationを設定
   has_many :comments, dependent: :destroy
