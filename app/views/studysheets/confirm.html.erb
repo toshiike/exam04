@@ -13,7 +13,7 @@
         <% if @studysheet.image.present? %>
         <p>添付:<%= @studysheet.image.url.gsub(/.*\//,'') %></p>
         <% end %>
-        <%= f.submit "登録",class: 'btn btn-primary btn-block' %>
+        <%= f.submit "登録",class: 'btn btn-sccess btn-block' %>
         <% end %>
 
     <%= form_for(@studysheet, url: new_studysheet_path, method: 'get') do |f| %>
