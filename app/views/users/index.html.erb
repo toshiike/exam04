@@ -14,7 +14,7 @@
         <%= profile_img(user) %>
         <% if user.id != current_user.id %>
           <li style="list-style: none">
-            <%= link_to '＊メッセージを送る＊', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post', class: 'btn btn-default'%>
+            <%= link_to '＊メッセージ＊', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post', class: 'btn btn-default'%>
           </li>
          <% end %>
       </div>
