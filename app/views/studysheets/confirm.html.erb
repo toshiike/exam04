@@ -10,7 +10,7 @@
 
         <p>タイトル:<%= @studysheet.title %></p>
         <p>本文:<%= @studysheet.content %></p>
-        <p>画像:<%= image_tag(@studysheet.image) %></p>
+        <p>添付:<%= @studysheet.image.url.gsub(/.*\//,'') %></p>
         <%= f.submit "登録",class: 'btn btn-primary btn-block' %>
         <% end %>
 

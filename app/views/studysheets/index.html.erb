@@ -1,21 +1,30 @@
 <div class="container">
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
     <p><%= notice %><%= alert %></p>
-    <h1>課題状況一覧</h1>
-      <%= link_to "課題を提出する", new_studysheet_path, class: 'btn btn-default'  %>
+    <% if current_user.admin?%>
+    <h1>管理ページ</h1>
+    <h4>管理者としてログインしています！</h4>
+    <% else %>
+    <h1>マイページ</h1>
+    <h4>毎日の勉強状況を記入しよう！</h4>
+      <%= link_to "勉強状況を記入する", new_studysheet_path, class: 'btn btn-default'  %>
+    <% end %>
 
       <% @studysheets.each do |studysheet| %>
       <div class="row">
+        <p>氏名:<%= studysheet.user.name %><img src="<%= studysheet.user.image_url %>"></p>
         <%= link_to studysheet_path(studysheet) do %>
         <h4><strong><%= studysheet.title %></strong></h4>
         <% end %>
         <p>内容:<%= studysheet.content %></p>
-        <p>作成者:<%= studysheet.user.name %><img src="<%= studysheet.user.image_url %>"></p>
-      </br>
-        　<%= link_to '添付あり',download_pdf_path(studysheet), :class => 'btn btn-default btn-xs', :target=>["_blank"]%>
-      </br>
+      <% if studysheet.image.present? %>
+          <p>添付:<%= studysheet.image.url.gsub(/.*\//,'') %></p>
+        　<%= link_to '添付あり',download_pdf_path(studysheet), :class => 'btn btn-sm btn-default', :target=>["_blank"]%>
+      <% end %>
+      <% if studysheet.user == current_user %>
           <%= link_to "編集", edit_studysheet_path(studysheet.id), class: 'btn btn-sm btn-success'  %>
           <%= link_to '削除', studysheet_path(studysheet.id), method: :delete, data: { confirm: '本当に編集していいですか？' }, class: 'btn btn-sm btn-danger'%>
+     <% end %>
         </div>
       <% end %>
       </br>

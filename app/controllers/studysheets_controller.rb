@@ -1,15 +1,30 @@
 class StudysheetsController < ApplicationController
 before_action :authenticate_user!
+before_filter :authenticate_user!
 before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @studysheets = Studysheet.all
+    if current_user.admin == true
+      @studysheets = Studysheet.all
+    else
+      @studysheets = current_user.studysheets.all
+    end
   end
 
   def show
-    @comment = @studysheet.comments.build
-    @comments = @studysheet.comments
-    Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
+    if current_user.admin == true
+      @comment = @studysheet.comments.build
+      @comments = @studysheet.comments
+      Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
+    else
+      if @studysheet.user != current_user
+        redirect_to studysheets_path, notice: "作成者しか閲覧できません"
+      else
+      @comment = @studysheet.comments.build
+      @comments = @studysheet.comments
+      Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
+      end
+    end
   end
 
   def new
@@ -32,16 +47,23 @@ before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-#    @studysheet = Studysheet.find(params[:id])
+    #    @studysheet = Studysheet.find(params[:id])
+    if @studysheet.user != current_user
+      redirect_to studysheets_path, notice: "作成者しか編集できません"
+    end
   end
 
   def update
 #    @studysheet = Studysheet.find(params[:id])
+  if @studysheet.user != current_user
+    redirect_to studysheets_path, notice: "作成者しか更新できません"
+  else
     if @studysheet.update(studysheets_params)
     redirect_to studysheets_path, notice: "更新しました！"
     else
       render 'edit'
     end
+  end
   end
 
   def confirm
@@ -51,8 +73,12 @@ before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
 
   def destroy
 #    @studysheet = Studysheet.find(params[:id])
+  if @studysheet.user != current_user
+    redirect_to studysheets_path, notice: "作成者しか削除できません"
+  else
     @studysheet.destroy
     redirect_to studysheets_path, notice: "削除しました！"
+  end
   end
 
   def download

@@ -17,7 +17,7 @@
 <%= f.label :content %>
 <%= f.text_field :content, class: 'form-control' %>
 <br>
-<%= image_tag(@studysheet.image_url) if image_tag(@studysheet.image_url) %>
+<p>添付:<%= @studysheet.image.url.gsub(/.*\//,'') if @studysheet.image.url.present?%></p>
 <%= f.file_field :image %>
 <%= f.hidden_field :image_cache %>
 

@@ -6,6 +6,8 @@
       <p class="left"><%= @studysheet.title %></p>
       <p class="left"><strong>内容</strong></p>
       <p class="left"><%= @studysheet.content %></p>
+      <p class="left"><strong>作成者</strong></p>
+      <p class="left"><%= @studysheet.user.name %></p>
       <p class="right">
         <strong>作成時間:</strong>
         <%= @studysheet.created_at.strftime("%y/%m/%d %p %l:%M") %>
