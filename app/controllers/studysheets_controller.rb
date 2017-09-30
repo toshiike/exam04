@@ -5,9 +5,9 @@ before_action :set_studysheet, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_user.admin == true
-      @studysheets = Studysheet.all
+      @studysheets = Studysheet.all.order(created_at: :desc)
     else
-      @studysheets = current_user.studysheets.all
+      @studysheets = current_user.studysheets.all.order(created_at: :desc)
     end
   end
 

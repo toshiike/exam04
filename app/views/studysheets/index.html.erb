@@ -13,6 +13,7 @@
       <% @studysheets.each do |studysheet| %>
       <div class="row">
         <p>氏名:<%= studysheet.user.name %><img src="<%= studysheet.user.image_url %>"></p>
+        <p>作成時刻:<%= studysheet.created_at.strftime("%y/%m/%d %p %l:%M") %></p>
         <%= link_to studysheet_path(studysheet) do %>
         <h4><strong><%= studysheet.title %></strong></h4>
         <% end %>
